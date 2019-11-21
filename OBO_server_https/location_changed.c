@@ -97,6 +97,7 @@ void locationChanged_cb (struct evhttp_request *req, void *arg)
     cJSON* latitude = cJSON_GetObjectItem(root, "latitude");
     cJSON* address = cJSON_GetObjectItem(root, "address");
 
+    //wait的乘客需要目的位置，经纬度
     if (strcmp(driver->valuestring, "no") == 0 &&
         strcmp(status->valuestring, STATUS_PASSENGER_WAIT) == 0) {
         cJSON* dst_longitude = cJSON_GetObjectItem(root, "dst_longitude");
@@ -107,7 +108,6 @@ void locationChanged_cb (struct evhttp_request *req, void *arg)
         printf("dst_address = %s\n", dst_address->valuestring);
     }
 
-    
 
     printf("sessionid = %s\n", sessionid->valuestring);
     printf("driver = %s\n", driver->valuestring);
@@ -143,6 +143,7 @@ void locationChanged_cb (struct evhttp_request *req, void *arg)
     if (ret == 0) {
     }
 #endif
+    //有订单
     if (ret == 0) {
 
         if (strcmp(driver->valuestring, "yes") == 0) {

@@ -1,0 +1,67 @@
+登录:   获取用户名 密码 是否是司机
+                向数据确认
+        生成sessionid
+                设置超时时间
+                sessionid加入数据库
+注册:   获取用户名 密码 是否是司机 电话 邮件 身份号
+             入库
+        生成sessionid
+                入库
+                设置超时
+位置改变：获取sessionid 是否是司机 状态  位置 如果是wait的乘客还需要目标位置
+                检查sessionid是否存在
+                设置超时
+                获取orderid
+        
+    司机：
+        drive:
+                如果autosend == yes,将orderid 时间 位置发给data
+                更新经纬
+                获取乘客经纬
+        idle
+
+        catch   
+                从地址池中摘除
+                更新经纬
+                获取乘客经纬
+        ready
+                将自己的位置再地址池中进行更新
+            将状态 订单号 乘客经纬返回
+    乘客：
+        travel：
+                更新经纬
+                获取司机经纬
+        idle
+        
+        wait
+                更新经纬
+                获取乘客经纬
+                得到订单状态
+            将订单号 司机经纬 订单状态返回
+下单：
+        获取sessionid 是否是司机 原位置 目标位置
+                获取所有附近司机数据
+        生成订单号
+                创建临时订单-> orderid sessionid 第一个司机的sessionid 创建订单时间
+                           -> 源和目标位置
+                给司机sessionid添加orderid
+                给乘客sessionid添加orderid
+完成id
+        获取sessionid和orderid
+                获取订单id 乘客sessionid 司机sessionid 订单所有信息
+                使用乘客司机sid得到用户名
+                持久化订单
+                将sid中的orderid设为none
+                删除orderid
+
+
+cache:
+    setstring   设置 key value
+    sethash     加入一堆field和value
+    selectcycle 设置生存周期
+    gethash   
+    radiusgeo   获取周围的geo
+    exist       判断key是否存在
+    remzset     移除geo
+    addgeo      增加
+    delete      删除key

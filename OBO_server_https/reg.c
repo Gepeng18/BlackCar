@@ -123,7 +123,7 @@ void reg_cb (struct evhttp_request *req, void *arg)
     }
 
 
-    //将sessionid存放到缓存数据库中
+    //将sessionid告诉前端
     char *response_data = make_reg_login_res_json(ret, recode, sessionid, "reg error");
 
     cJSON_Delete(root);

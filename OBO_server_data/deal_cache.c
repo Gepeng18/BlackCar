@@ -72,7 +72,7 @@ int deal_cache_setString(cJSON *root)
         if (strcmp(unlimited->valuestring, "no") == 0) {
             cJSON* lifecycle= cJSON_GetObjectItem(root, "lifecycle");
             LOG(LOG_MODULE_SERVER_DATA, LOG_PROC_CACHE, "lifecycle = %d\n", lifecycle->valueint);
-            //给该key设置声明周期
+            //给该key设置生命周期
             rop_set_key_lifetime(conn, key->valuestring, lifecycle->valueint);
         }
 
